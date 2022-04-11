@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background: rgb(8,24,69);
+    background: linear-gradient(270deg, rgba(8,24,69,1) 0%, rgba(55,94,204,1) 100%);
+}
+
+h1 {
+    color: white;
+    padding: 1rem;
+}
