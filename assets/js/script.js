@@ -5,11 +5,12 @@ let fiveDayContainerEl = document.querySelector("#fiveDayContainer")
 let todaysDate = moment().format(    'MMMM Do YYYY');
 let fiveDayHeaderEl = document.querySelector(".five-day-header")
 let savedSearchesContainerEl = document.querySelector("#savedSearches")
+let previousSearchButton = document.querySelector(".previous-search")
 
 let savedLocations = JSON.parse(localStorage.getItem('locations')) || []
 
 
-
+// User inputs their desired city
 let searchByCity = function() {
     event.preventDefault()
     // assign city value to selectedCity
@@ -19,6 +20,7 @@ let searchByCity = function() {
     getFeaturedWeatherToday(selectedCity)
     saveUserInput(selectedCity)
 }
+
 
 // Fetch the Today's API data
 let getFeaturedWeatherToday = function(city) {
@@ -74,7 +76,6 @@ let displayWeatherFiveDays = function(fiveDayInfo) {
         
         // daily icon
         let dailyIconCode = fiveDayInfo.daily[i].weather[0].icon;
-        console.log(dailyIconCode)
         let iconUrl = "http://openweathermap.org/img/w/" + dailyIconCode + ".png";
         let dailyWeatherIcon = document.createElement('img')
         dailyWeatherIcon.classList.add("weather-icon-img")
@@ -186,14 +187,31 @@ let loadUserInput = function() {
         for (var i = 0; i < searchedCities.length; i++){
             $(`#${searchedCities[i]}`).val()
         }
-    console.log(searchedCities)
+        for( let j = 0; j < searchedCities.length; j++) {
+            let createdPreviousCityButton = document.createElement("button")
+            createdPreviousCityButton.textContent = searchedCities[j]
+            createdPreviousCityButton.classList.add("btn", "btn-secondary", "form-control", "mb-2", "previous-search")    
+            savedSearchesContainerEl.appendChild(createdPreviousCityButton)
+            let buttonText = createdPreviousCityButton.outerText
+            
+
+        }
+    $(".previous-search").on("click", function() {
+        let selectedPreviousSearch = $(this).text().trim()
+        getFeaturedWeatherToday(selectedPreviousSearch)
+    })
+
 }
+
 
 // Event listeners
 searchButtonEl.addEventListener("click", searchByCity)
-
-
+console.log(previousSearchButton)
 
 loadUserInput()
 
 // create a button with the text content of the user input and append it below
+
+
+// When a previous search button is clicked...
+// run getFeaturedWeatherToday with the text value of the button as the parameter
