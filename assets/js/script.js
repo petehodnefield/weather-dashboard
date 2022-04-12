@@ -56,24 +56,39 @@ let getFeaturedWeatherFiveDays = function(latitude, longitude) {
 
 let displayWeatherFiveDays = function(fiveDayInfo) {
     fiveDayHeaderEl.classList.remove("hide-me")
+    let dateCounter = 1
+
     // create five cards, each holding the info for every day
     for(let i = 1; i < 6; i++) {
+        // daily date
+        let eachDate = moment().add(dateCounter++, 'days').format('MMMM Do YYYY')
+        let eachDateContainer = document.createElement("div")
+        eachDateContainer.textContent = eachDate
+        
+        
+        // daily icon
+        let dailyIconCode = fiveDayInfo.daily[i].weather[0].icon;
+        console.log(dailyIconCode)
+        let iconUrl = "http://openweathermap.org/img/w/" + dailyIconCode + ".png";
+        let dailyWeatherIcon = document.createElement('img')
+        dailyWeatherIcon.classList.add("weather-icon-img")
+        dailyWeatherIcon.setAttribute("src", iconUrl)
+
         // daily temperatures
         let dailyTemp = document.createElement("div")
-        dailyTemp.textContent = "Temperate: " + fiveDayInfo.daily[i].temp.day + "°F"
-        console.log(dailyTemp)
+        dailyTemp.textContent = "Temp: " + fiveDayInfo.daily[i].temp.day + "°F"
         // daily wind
         let dailyWindSpeed = document.createElement("div")
         dailyWindSpeed.textContent = "Wind: " + fiveDayInfo.daily[i].wind_speed + " MPH"
-        console.log(dailyWindSpeed)
         // daily humidity
         let dailyHumidity = document.createElement("div")
         dailyHumidity.textContent = "Humidity: " + fiveDayInfo.daily[i].humidity + "%"
-        console.log(dailyHumidity)
 
         // Append to a container
         let dailyWeatherStatisticsContainerEl = document.createElement("div")
         dailyWeatherStatisticsContainerEl.classList.add("daily-container")
+        dailyWeatherStatisticsContainerEl.appendChild(eachDateContainer)
+        dailyWeatherStatisticsContainerEl.appendChild(dailyWeatherIcon)
         dailyWeatherStatisticsContainerEl.appendChild(dailyTemp)
         dailyWeatherStatisticsContainerEl.appendChild(dailyWindSpeed)
         dailyWeatherStatisticsContainerEl.appendChild(dailyHumidity)

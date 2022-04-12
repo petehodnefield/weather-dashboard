@@ -29,8 +29,8 @@ h1 {
 }
 
 .weather-icon-img {
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
     
 }
 
@@ -43,13 +43,23 @@ span {
     font-size: 1.2rem;
 }
 
+.right-side-container {
+    background: grey;
+    border: 3px solid black;
+    
+}
+
 #fiveDayContainer {
     display: flex;
+    justify-content: center;
+ 
 }
 
 .daily-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: black;
     padding: 1rem;
     margin: 1rem;
@@ -57,4 +67,8 @@ span {
 
 .hide-me {
     display: none;
+}
+
+.five-day-header {
+    margin-left: 4rem;
 }
