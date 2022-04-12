@@ -4,6 +4,8 @@
 
 body {
     margin: 0;
+    color: white;
+    text-shadow: 1px 1px 4px black;
 }
 
 header {
@@ -13,7 +15,46 @@ header {
     background: linear-gradient(270deg, rgba(8,24,69,1) 0%, rgba(55,94,204,1) 100%);
 }
 
+main {
+    display: flex;
+}
+
 h1 {
     color: white;
     padding: 1rem;
+}
+
+.created-div {
+    font-size: 3rem;
+}
+
+.weather-icon-img {
+    width: 100px;
+    height: 100px;
+    
+}
+
+.inline-header {
+    display: inline;
+    padding-right: 1.5rem;
+}
+
+span {
+    font-size: 1.2rem;
+}
+
+#fiveDayContainer {
+    display: flex;
+}
+
+.daily-container {
+    display: flex;
+    flex-direction: column;
+    background: black;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.hide-me {
+    display: none;
 }
