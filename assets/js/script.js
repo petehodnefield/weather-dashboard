@@ -4,6 +4,9 @@ let rightSideContainerEl = document.querySelector("#right-side")
 let fiveDayContainerEl = document.querySelector("#fiveDayContainer")
 let todaysDate = moment().format(    'MMMM Do YYYY');
 let fiveDayHeaderEl = document.querySelector(".five-day-header")
+let savedSearchesContainerEl = document.querySelector("#savedSearches")
+
+let savedLocations = JSON.parse(localStorage.getItem('locations')) || []
 
 
 
@@ -14,6 +17,7 @@ let searchByCity = function() {
 
     // run getFeaturedWeather with selectedCity
     getFeaturedWeatherToday(selectedCity)
+    saveUserInput(selectedCity)
 }
 
 // Fetch the Today's API data
@@ -55,6 +59,8 @@ let getFeaturedWeatherFiveDays = function(latitude, longitude) {
 }
 
 let displayWeatherFiveDays = function(fiveDayInfo) {
+    fiveDayContainerEl.textContent = '';
+
     fiveDayHeaderEl.classList.remove("hide-me")
     let dateCounter = 1
 
@@ -100,6 +106,8 @@ let displayWeatherFiveDays = function(fiveDayInfo) {
 
 
 let displayWeatherToday = function(weatherInfo) {
+    // clear the container
+    rightSideContainerEl.textContent = ''
     // City Name
     let displayCityName = document.createElement("h2")
     displayCityName.textContent =  weatherInfo.name
@@ -161,5 +169,31 @@ let displayWeatherToday = function(weatherInfo) {
 
 }
 
+
+
+let saveUserInput = function(parameter) {
+    let savedUserInput = document.createElement("button")
+    savedUserInput.setAttribute("data-location", parameter)
+    savedUserInput.classList.add("form-control", "btn", "btn-secondary", "saved-results")
+    savedUserInput.textContent = parameter
+    savedLocations.push(savedUserInput.textContent)
+    savedSearchesContainerEl.appendChild(savedUserInput)
+    localStorage.setItem("locations", JSON.stringify(savedLocations))
+}
+
+let loadUserInput = function() {
+    var searchedCities = JSON.parse(localStorage.getItem("locations") || "[]");
+        for (var i = 0; i < searchedCities.length; i++){
+            $(`#${searchedCities[i]}`).val()
+        }
+    console.log(searchedCities)
+}
+
 // Event listeners
 searchButtonEl.addEventListener("click", searchByCity)
+
+
+
+loadUserInput()
+
+// create a button with the text content of the user input and append it below
