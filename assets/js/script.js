@@ -8,6 +8,7 @@ let savedSearchesContainerEl = document.querySelector("#savedSearches")
 let previousSearchButton = document.querySelector(".previous-search")
 
 let savedLocations = JSON.parse(localStorage.getItem('locations')) || []
+// debugger;
 
 
 // User inputs their desired city
