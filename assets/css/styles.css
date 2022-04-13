@@ -4,6 +4,7 @@
 
 body {
     margin: 0;
+    padding: 0;
     color: white;
     text-shadow: 1px 1px 4px black;
 }
@@ -11,12 +12,16 @@ body {
 header {
     display: flex;
     justify-content: center;
+    width: 100vw;
     background: rgb(8,24,69);
     background: linear-gradient(270deg, rgba(8,24,69,1) 0%, rgba(55,94,204,1) 100%);
 }
 
 main {
     display: flex;
+    margin-top: 0;
+    margin-right: 0;
+    width: 100vw;
 }
 
 h1 {
@@ -44,15 +49,24 @@ span {
 }
 
 .right-side-container {
-    background: grey;
-    border: 3px solid black;
+    background: dodgerblue;
+    border: 3px solid white;
     
 }
 
 #fiveDayContainer {
-    display: flex;
+   background: dodgerblue;
+   border: 3px solid white;
+   border-radius: 10px;
     justify-content: center;
  
+}
+
+.five-day-weather-info-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 .daily-container {
@@ -75,4 +89,17 @@ span {
 
 .saved-results {
     margin-bottom: .5rem;
+}
+
+
+@media screen and (max-width: 700px) {
+    main {
+        width: 100vw;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .right-side-container {
+        width: 100vw;
+    }
 }

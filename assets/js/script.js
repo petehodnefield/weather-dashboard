@@ -6,6 +6,7 @@ let todaysDate = moment().format(    'MMMM Do YYYY');
 let fiveDayHeaderEl = document.querySelector(".five-day-header")
 let savedSearchesContainerEl = document.querySelector("#savedSearches")
 let previousSearchButton = document.querySelector(".previous-search")
+let fiveDayWeatherInfoContainerEl = document.querySelector(".five-day-weather-info-container")
 
 let savedLocations = JSON.parse(localStorage.getItem('locations')) || []
 // debugger;
@@ -62,9 +63,11 @@ let getFeaturedWeatherFiveDays = function(latitude, longitude) {
 }
 
 let displayWeatherFiveDays = function(fiveDayInfo) {
-    fiveDayContainerEl.textContent = '';
-
+    fiveDayWeatherInfoContainerEl.textContent = '';
     fiveDayHeaderEl.classList.remove("hide-me")
+    fiveDayContainerEl.appendChild(fiveDayHeaderEl)
+    fiveDayContainerEl.appendChild(fiveDayWeatherInfoContainerEl)
+
     let dateCounter = 1
 
     // create five cards, each holding the info for every day
@@ -100,7 +103,7 @@ let displayWeatherFiveDays = function(fiveDayInfo) {
         dailyWeatherStatisticsContainerEl.appendChild(dailyTemp)
         dailyWeatherStatisticsContainerEl.appendChild(dailyWindSpeed)
         dailyWeatherStatisticsContainerEl.appendChild(dailyHumidity)
-        fiveDayContainerEl.appendChild(dailyWeatherStatisticsContainerEl)
+        fiveDayWeatherInfoContainerEl.appendChild(dailyWeatherStatisticsContainerEl)
     }
 
     
@@ -159,7 +162,7 @@ let displayWeatherToday = function(weatherInfo) {
     let weatherHumidityDisplay = document.createElement("div")
     weatherHumidityDisplay.classList.add("created-div")
 
-    weatherHumidityDisplay.textContent = "Humidity: " + weatherInfo.main.humidity
+    weatherHumidityDisplay.textContent = "Humidity: " + weatherInfo.main.humidity + "%"
 
     rightSideContainerEl.appendChild(weatherHumidityDisplay)
 
@@ -185,9 +188,9 @@ let saveUserInput = function(parameter) {
 
 let loadUserInput = function() {
     var searchedCities = JSON.parse(localStorage.getItem("locations") || "[]");
-        for (var i = 0; i < searchedCities.length; i++){
-            $(`#${searchedCities[i]}`).val()
-        }
+        // for (var i = 0; i < searchedCities.length; i++){
+        //     $(`#${searchedCities[i]}`).val()
+        // }
         for( let j = 0; j < searchedCities.length; j++) {
             let createdPreviousCityButton = document.createElement("button")
             createdPreviousCityButton.textContent = searchedCities[j]

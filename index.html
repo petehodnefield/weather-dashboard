@@ -17,8 +17,8 @@
     <header>
       <h1>Weather Dashboard</h1>
     </header>
-    <main class="row p-3 bg-danger">
-      <div id="left-side" class="col-4 pt-4">
+    <main class="row mx-0 bg-danger">
+      <div id="left-side" class="col-sm-12 col-md-4 pt-4">
         <h2 class="">Search for a City:</h2>
         <form class="city-search-form" action="">
           <div class="form-group">
@@ -37,15 +37,17 @@
         </form>
         <div id="savedSearches"></div>
       </div>
-      <div class="right-side-container col-8">
+      <div class="right-side-container col-sm-12 col-md-8">
         <div id="right-side" class="col-8">
           <div id="forecast-today"></div>
         </div>
       </div>
-      <div id="fiveDayContainer" class="row text-left">
-        <h2 class="five-day-header hide-me col-12">5-Day Forecast</h2>
+      <div id="fiveDayContainer" class="col-sm-12 col-md-8 flex-wrap text-left">
+        <h2 class="five-day-header flex-wrap hide-me col-12">5-Day Forecast</h2>
+        <div class="five-day-weather-info-container"></div>
       </div>
     </main>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <script
