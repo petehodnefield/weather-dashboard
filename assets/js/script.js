@@ -20,7 +20,7 @@ let searchByCity = function() {
 
     // run getFeaturedWeather with selectedCity
     getFeaturedWeatherToday(selectedCity)
-    
+    saveUserInput(selectedCity)
 }
 
 
@@ -35,7 +35,6 @@ let getFeaturedWeatherToday = function(city) {
         if (response.ok) {
             response.json().then(function(data) {            
                 displayWeatherToday(data);
-                saveUserInput(cityName)
                 console.log(data)
             })
         }
