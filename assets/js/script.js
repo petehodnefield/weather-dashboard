@@ -20,7 +20,7 @@ let searchByCity = function() {
 
     // run getFeaturedWeather with selectedCity
     getFeaturedWeatherToday(selectedCity)
-    saveUserInput(selectedCity)
+    
 }
 
 
@@ -35,6 +35,7 @@ let getFeaturedWeatherToday = function(city) {
         if (response.ok) {
             response.json().then(function(data) {            
                 displayWeatherToday(data);
+                saveUserInput(cityName)
                 console.log(data)
             })
         }
@@ -177,13 +178,29 @@ let displayWeatherToday = function(weatherInfo) {
 
 
 let saveUserInput = function(parameter) {
-    let savedUserInput = document.createElement("button")
-    savedUserInput.setAttribute("data-location", parameter)
-    savedUserInput.classList.add("form-control", "btn", "btn-secondary", "saved-results")
-    savedUserInput.textContent = parameter
-    savedLocations.push(savedUserInput.textContent)
-    savedSearchesContainerEl.appendChild(savedUserInput)
-    localStorage.setItem("locations", JSON.stringify(savedLocations))
+    // create a button for previous searches
+
+    if (Boolean(parameter)) {
+        let savedUserInput = document.createElement("button")
+        savedUserInput.classList.add("form-control", "btn", "btn-secondary", "saved-results", "previous-search")
+        // input the city name as the text content
+        savedUserInput.textContent = parameter
+        savedLocations.push(savedUserInput.textContent)
+        // append to the container
+        savedSearchesContainerEl.appendChild(savedUserInput)
+        // save to local storage
+        localStorage.setItem("locations", JSON.stringify(savedLocations))
+    
+        console.log('parameter',parameter )
+        $(".previous-search").on("click", function() {
+            let selectedPreviousSearch = $(this).text().trim()
+            getFeaturedWeatherToday(selectedPreviousSearch)
+        })
+    
+    }
+   
+    
+
 }
 
 let loadUserInput = function() {
@@ -210,7 +227,7 @@ let loadUserInput = function() {
 
 // Event listeners
 searchButtonEl.addEventListener("click", searchByCity)
-console.log(previousSearchButton)
+
 
 loadUserInput()
 
