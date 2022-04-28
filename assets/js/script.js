@@ -2,7 +2,7 @@ let userInputFieldEl = document.querySelector(".user-input")
 let searchButtonEl = document.querySelector(".search-button")
 let rightSideContainerEl = document.querySelector("#right-side")
 let fiveDayContainerEl = document.querySelector("#fiveDayContainer")
-let todaysDate = moment().format(    'MMMM Do YYYY');
+let todaysDate = moment().format(    'MMMM Do, YYYY');
 let fiveDayHeaderEl = document.querySelector(".five-day-header")
 let savedSearchesContainerEl = document.querySelector("#savedSearches")
 let previousSearchButton = document.querySelector(".previous-search")
@@ -120,11 +120,13 @@ let displayWeatherToday = function(weatherInfo) {
 
     rightSideContainerEl.appendChild(displayCityName)
     // Date
-    let todaysDateContainer = document.createElement("span")
+    let todaysDateContainer = document.createElement("div")
     todaysDateContainer.textContent = todaysDate
+    todaysDateContainer.classList.add("created-div")
 
      // create container for cityName and data
      let nameAndDateContainerEl = document.createElement("div")
+     nameAndDateContainerEl.classList.add("name-date-container")
 
      nameAndDateContainerEl.appendChild(displayCityName)
      nameAndDateContainerEl.appendChild(todaysDateContainer)
@@ -181,7 +183,7 @@ let saveUserInput = function(parameter) {
 
     if (Boolean(parameter)) {
         let savedUserInput = document.createElement("button")
-        savedUserInput.classList.add("form-control", "btn", "btn-secondary", "saved-results", "previous-search")
+        savedUserInput.classList.add( "btn", "btn-secondary", "saved-results", "previous-search")
         // input the city name as the text content
         savedUserInput.textContent = parameter
         savedLocations.push(savedUserInput.textContent)
