@@ -79,11 +79,17 @@ span {
 .right-side-container {
     background: var(--pink);
     text-align: center;
+    width: 100%;
+}
+
+.container-border {
+        border-top: 3px solid var(--tan);
+       
+
 }
 
 #fiveDayContainer {
    background: var(--pink);
-   border: 3px solid white;
    border-radius: 10px;
     justify-content: center;
     
@@ -121,9 +127,9 @@ span {
 
 
 .five-day-weather-info-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     flex-wrap: wrap;
-    width: 100%;
     justify-content: center;
 }
 
@@ -132,9 +138,12 @@ span {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: black;
+    background: var(--blue) ;
     padding: 1rem;
-    margin: 1rem;
+    margin: .5rem;
+    border: 2px solid var(--tan);
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px var(--grey) ;
 }
 
 .hide-me {
@@ -142,7 +151,7 @@ span {
 }
 
 .five-day-header {
-    margin-left: 4rem;
+    text-align: center;
 }
 
 /* Form style */
@@ -168,11 +177,30 @@ span {
 
 
 @media screen and (min-width: 768px) {
+    body {
+        height: 100vh;
+    }
     main {
         width: 100vw;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        height: 100vh;
+        
+    }
+    .container {
+        flex-direction: row;
+    }
+
+    .search-container {
+        width: 30%;
+        padding-left: 3rem;
+    }
+
+    .right-side-container {
+        width: 20%;
+        flex-grow: 3;
+    }
+
+    .daily-container {
+        font-size: 2rem;
     }
     
 }

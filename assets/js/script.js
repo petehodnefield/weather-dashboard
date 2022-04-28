@@ -65,6 +65,7 @@ let getFeaturedWeatherFiveDays = function(latitude, longitude) {
 let displayWeatherFiveDays = function(fiveDayInfo) {
     fiveDayWeatherInfoContainerEl.textContent = '';
     fiveDayHeaderEl.classList.remove("hide-me")
+    fiveDayContainerEl.classList.add("container-border")
     fiveDayContainerEl.appendChild(fiveDayHeaderEl)
     fiveDayContainerEl.appendChild(fiveDayWeatherInfoContainerEl)
 
@@ -113,6 +114,8 @@ let displayWeatherFiveDays = function(fiveDayInfo) {
 let displayWeatherToday = function(weatherInfo) {
     // clear the container
     rightSideContainerEl.textContent = ''
+    
+    rightSideContainerEl.classList.add("container-border")
     // City Name
     let displayCityName = document.createElement("h2")
     displayCityName.textContent =  weatherInfo.name
