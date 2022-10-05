@@ -3,9 +3,9 @@
 }
 
 :root {
-    --grey: #EEEEEE;
-    --white: #FCFCFC;
-    --blue: #9CC0E7;
+    --1: #EEEEEE;
+    --2: #232323;
+    --3: #604ed4;
     --tan: #FAEACB;
     --pink: #F7DBD7;
 
@@ -15,8 +15,9 @@
 body {
     margin: 0;
     padding: 0;
-    color: white;
+    color: var(--1);
     text-shadow: 0px 0px 2px black;
+    background: var(--2);
     font-family: "Lato", sans-serif;
 }
 
@@ -24,7 +25,6 @@ header {
     display: flex;
     justify-content: center;
     width: 100vw;
-    background: var(--pink);
     text-align: center;
 }
 
@@ -35,12 +35,11 @@ main {
     margin-right: 0;
     width: 100vw;
     height: 100vh;
-    background: var(--pink);
 }
 
 h1 {
     color: white;
-    padding: .4rem 0;
+    padding: 1.2rem 0;
     margin: 0;
     font-size: 4.6rem;
 }
@@ -54,13 +53,18 @@ h2 {
 }
 
 .weather-icon-img {
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     
 }
 
 .inline-header {
     margin: 0;
+    text-align: center;
+    font-size: 4rem;
+}
+.extra-padding {
+  padding-bottom: 3rem;
 }
 
 span {
@@ -77,9 +81,16 @@ span {
 }
 
 .right-side-container {
-    background: var(--pink);
     text-align: center;
     width: 100%;
+    margin: 2rem;
+    padding: 2rem;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .container-border {
@@ -89,16 +100,22 @@ span {
 }
 
 #fiveDayContainer {
-   background: var(--pink);
    border-radius: 10px;
     justify-content: center;
     
  
 }
-.container {
+.day-container {
     display: flex;
     flex-direction: column;
+    
+    background: var(--3);
     align-items: center;
+    padding: 2rem 2rem;
+    height: 500px;
+    border-radius: 20px;
+    text-align: left;
+    color: var(--1);
 }
 
 /* Search area style */
@@ -109,15 +126,18 @@ span {
    align-items: center;
    justify-content: center;
    text-align: center;
+   margin: 0;
 }
 
 .user-input {
     padding: 1rem;
     font-size: 1.5rem;
+    border-radius: 10px;
 }
 
 .city-search-form {
-    width: 100%;
+    width: 90%;
+    border-radius: 20px;
 }
 
 .form-group {
@@ -128,7 +148,8 @@ span {
 
 .five-day-weather-info-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 .6rem;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -138,14 +159,18 @@ span {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: var(--blue) ;
     padding: 1rem;
+    height: 300px;
+    font-size: 2rem;
     margin: .5rem;
     border: 2px solid var(--tan);
-    border-radius: 5px;
+    
+background: hsla(248, 61%, 57%, 1);
+
+background: linear-gradient(180deg, hsla(248, 61%, 57%, 1) 0%, hsla(234, 88%, 68%, 1) 100%);
+    border-radius: 10px;
     box-shadow: 0px 0px 5px var(--grey) ;
 }
-
 .hide-me {
     display: none;
 }
@@ -167,12 +192,13 @@ span {
 }
 
 .btn {
-    background: var(--blue);
+    background: var(--3);
     color: white;
     margin: .2rem 0;
     padding: .7rem 4rem;
+    border: none;
     width: 100%;
-    border: 4px solid var(--grey);
+    border-radius: 100vmax;
 }
 
 
@@ -187,8 +213,13 @@ span {
     }
     .container {
         flex-direction: row;
+        
+  justify-content: flex-start;
+  align-items: flex-start;
     }
-
+    .five-day-weather-info-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
     .search-container {
         width: 30%;
         padding-left: 3rem;
@@ -198,9 +229,37 @@ span {
         width: 20%;
         flex-grow: 3;
     }
-
+    .weather-icon-img {
+      height: 120px;
+      width: 120px;
+    }
     .daily-container {
         font-size: 2rem;
     }
-    
+ 
+.card {
+  height: 600px;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 2.4rem;
 }
+}
+@media screen and (min-width: 1080px) {
+   .five-day-weather-info-container {   
+     grid-template-columns: repeat(3, 1fr);
+      padding: 1rem;
+    }
+   h1 {
+     font-size: 5.5rem;
+   }
+   .inline-header {
+     font-size: 4.5rem;
+   }
+   .created-div {
+     font-size: 2.2rem;
+   }
+}
+@media screen and (min-width: 1400px) {   .five-day-weather-info-container {   
+    grid-template-columns: repeat(5, 1fr);
+     padding: 1rem;
+   }}
