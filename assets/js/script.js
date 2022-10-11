@@ -14,14 +14,13 @@ let savedLocations = JSON.parse(localStorage.getItem("locations")) || [];
 // debugger;
 
 // User inputs their desired city
-let searchByCity = function () {
+let searchByCity = async function () {
   event.preventDefault();
   // assign city value to selectedCity
   let selectedCity = userInputFieldEl.value;
 
   // run getFeaturedWeather with selectedCity
   getFeaturedWeatherToday(selectedCity);
-  saveUserInput(selectedCity);
 };
 
 // Fetch the Today's API data
@@ -38,7 +37,8 @@ let getFeaturedWeatherToday = function (city) {
     if (response.ok) {
       response.json().then(function (data) {
         displayWeatherToday(data);
-        console.log(data);
+
+        saveUserInput(city);
       });
     } else {
       alert("Please enter a valid city name!");
@@ -60,7 +60,6 @@ let getFeaturedWeatherFiveDays = function (latitude, longitude) {
     if (response.ok) {
       response.json().then(function (data) {
         displayWeatherFiveDays(data);
-        console.log(data);
       });
     } else {
       alert("Error! Please try again.");
@@ -71,7 +70,6 @@ let getFeaturedWeatherFiveDays = function (latitude, longitude) {
 let displayWeatherFiveDays = function (fiveDayInfo) {
   fiveDayWeatherInfoContainerEl.textContent = "";
   fiveDayHeaderEl.classList.remove("hide-me");
-  fiveDayContainerEl.classList.add("container-border");
   fiveDayContainerEl.appendChild(fiveDayHeaderEl);
   fiveDayContainerEl.appendChild(fiveDayWeatherInfoContainerEl);
 
@@ -85,12 +83,16 @@ let displayWeatherFiveDays = function (fiveDayInfo) {
       .format("MMMM Do, YYYY");
     let eachDateContainer = document.createElement("div");
     eachDateContainer.textContent = eachDate;
+    eachDateContainer.classList.add("extra-padding");
 
     // daily icon
     let dailyIconCode = fiveDayInfo.daily[i].weather[0].icon;
+    console.log(dailyIconCode);
+
     let iconUrl = "http://openweathermap.org/img/w/" + dailyIconCode + ".png";
     let dailyWeatherIcon = document.createElement("img");
     dailyWeatherIcon.classList.add("weather-icon-img");
+
     dailyWeatherIcon.setAttribute("src", iconUrl);
 
     // daily temperatures
@@ -108,6 +110,15 @@ let displayWeatherFiveDays = function (fiveDayInfo) {
     // Append to a container
     let dailyWeatherStatisticsContainerEl = document.createElement("div");
     dailyWeatherStatisticsContainerEl.classList.add("daily-container", "card");
+
+    // add proper background to container
+    if (dailyIconCode === "01d") {
+      dailyWeatherStatisticsContainerEl.classList.add("sunny-weather");
+    } else if (dailyIconCode === "11d") {
+      dailyWeatherStatisticsContainerEl.classList.add("thunderstorm-weather");
+    } else if (dailyIconCode === "09d" || dailyIconCode === "10d") {
+      dailyWeatherStatisticsContainerEl.classList.add("rain-weather");
+    }
     dailyWeatherStatisticsContainerEl.appendChild(eachDateContainer);
     dailyWeatherStatisticsContainerEl.appendChild(dailyTemp);
     dailyWeatherStatisticsContainerEl.appendChild(dailyWindSpeed);
@@ -182,38 +193,54 @@ let displayWeatherToday = function (weatherInfo) {
   getFeaturedWeatherFiveDays(cityLatitude, cityLongitude);
 };
 
-let saveUserInput = function (parameter) {
-  // create a button for previous searches
+let createButton = function (text) {
+  let savedUserInput = document.createElement("button");
+  savedUserInput.classList.add(
+    "btn",
+    "btn-secondary",
+    "city-btn",
+    "saved-results",
+    "previous-search"
+  );
+  savedUserInput.textContent = text;
 
-  if (Boolean(parameter)) {
-    let savedUserInput = document.createElement("button");
-    savedUserInput.classList.add(
-      "btn",
-      "btn-secondary",
-      "saved-results",
-      "previous-search"
-    );
-    // input the city name as the text content
-    savedUserInput.textContent = parameter;
-    savedLocations.push(savedUserInput.textContent);
-    // append to the container
-    savedSearchesContainerEl.appendChild(savedUserInput);
-    // save to local storage
-    localStorage.setItem("locations", JSON.stringify(savedLocations));
+  // append to the container
+  savedSearchesContainerEl.appendChild(savedUserInput);
+  // const paren = await localStorage.getItem("locations").split('"');
+  // console.log(paren);
 
-    console.log("parameter", parameter);
-    $(".previous-search").on("click", function () {
-      let selectedPreviousSearch = $(this).text().trim();
-      getFeaturedWeatherToday(selectedPreviousSearch);
-    });
+  // save to local storage
+  localStorage.setItem("locations", JSON.stringify(savedLocations));
+
+  $(".previous-search").on("click", function () {
+    let selectedPreviousSearch = $(this).text().trim();
+    getFeaturedWeatherToday(selectedPreviousSearch);
+  });
+};
+
+let saveUserInput = async function (parameter) {
+  console.log("array", savedLocations);
+  const userInput = parameter;
+  if (savedLocations.length === 0) {
+    savedLocations.push(userInput);
+    createButton(parameter);
+  } else if (savedLocations.length >= 1) {
+    console.log("savedLocations", savedLocations);
+    const checkIfExists = savedLocations.indexOf(userInput);
+    console.log(checkIfExists);
+    if (checkIfExists >= 0) {
+      console.log("true");
+      return;
+    } else {
+      savedLocations.push(userInput);
+      createButton(userInput);
+      console.log("false");
+    }
   }
 };
 
 let loadUserInput = function () {
   var searchedCities = JSON.parse(localStorage.getItem("locations") || "[]");
-  // for (var i = 0; i < searchedCities.length; i++){
-  //     $(`#${searchedCities[i]}`).val()
-  // }
   for (let j = 0; j < searchedCities.length; j++) {
     let createdPreviousCityButton = document.createElement("button");
     createdPreviousCityButton.textContent = searchedCities[j];
@@ -221,6 +248,7 @@ let loadUserInput = function () {
       "btn",
       "btn-secondary",
       "form-control",
+      "city-btn",
       "mb-2",
       "previous-search"
     );
