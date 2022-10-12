@@ -49,7 +49,7 @@ h2 {
 }
 
 .created-div {
-    font-size: 2rem;
+    font-size:  2rem;
 }
 
 .weather-icon-img {
@@ -64,7 +64,7 @@ h2 {
     font-size: 4rem;
 }
 .extra-padding {
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 }
 
 span {
@@ -84,6 +84,7 @@ span {
     text-align: center;
     width: 100%;
     margin: 2rem;
+    overflow: none;
     padding: 2rem;
 }
 .container {
@@ -110,14 +111,22 @@ span {
 .day-container {
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     background: var(--3);
+    overflow: none;
     align-items: center;
     padding: 2rem 2rem;
     height: 500px;
     border-radius: 20px;
     color: var(--1);
 }
-
+.day-container .created-div,
+.day-container .inline-header
+{
+  text-shadow: 
+  -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 
+  -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
+}
 /* Search area style */
 .search-container {
    display: flex;
@@ -177,6 +186,26 @@ background: linear-gradient(180deg, hsla(248, 61%, 57%, 1) 0%, hsla(234, 88%, 68
     border-radius: 10px;
     box-shadow: 0px 0px 5px var(--grey) ;
 }
+.text-background {
+box-shadow: rgba(50, 50, 93, 0.9) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.9) 0px 18px 36px -18px inset;
+border-radius: 20px;
+padding: 1rem 2rem;
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+flex-direction: column;
+height: 100%;
+}
+.text-background div {
+ text-shadow: 
+        -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 
+        -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
+}
+.date5 {
+  font-size: 2.3rem;
+  padding-top: 1rem;
+}
 .card {
   font-size: 1.8rem;
 }
@@ -225,13 +254,20 @@ background: linear-gradient(180deg, hsla(248, 61%, 57%, 1) 0%, hsla(234, 88%, 68
 }
 
 /* /* Weather backgrounds { */
+.card-img {
+  width: 100%;
+  height:  100%;
+}
 .sunny-weather {
 background: url(../images/sunshine.jpg); background-size: cover;
 }
-.few-clouds-weather { background: url(../images/few-clouds.jpg); background-size: cover;
+.few-clouds-weather { background: url(../images/few-clouds.jpg);
+   background-size: auto; 
+background-position: 50% 10%;
 }
 .scattered-clouds-weather {
-  background: grey;
+  background: url(../images/cloudy.jpg);
+background-size: cover;
 }
 .rain-weather, .shower-rain-weather {
   background: url(../images/rain.jpg);
@@ -257,6 +293,12 @@ background: url(../images/sunshine.jpg); background-size: cover;
   justify-content: flex-start;
   align-items: flex-start;
     }
+.created-div {
+font-size: 1.5rem;
+}
+.date5 {
+font-size: 2.7rem;
+}
     .five-day-weather-info-container {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -284,6 +326,13 @@ background: url(../images/sunshine.jpg); background-size: cover;
   font-size: 2.4rem;
 }
 }
+@media screen and (min-width: 950px) {
+  
+.created-div {
+font-size: 2rem;
+transition: 200ms;
+}
+}
 @media screen and (min-width: 1080px) {
    .five-day-weather-info-container {   
      grid-template-columns: repeat(3, 1fr);
@@ -298,8 +347,19 @@ background: url(../images/sunshine.jpg); background-size: cover;
    .created-div {
      font-size: 2.2rem;
    }
+.date5 {
+font-size: 2.7rem;
 }
-@media screen and (min-width: 1400px) {   .five-day-weather-info-container {   
+}
+@media screen and (min-width: 1400px) {  
+   .five-day-weather-info-container {   
     grid-template-columns: repeat(5, 1fr);
      padding: 1rem;
-   }}
+   }
+.date5 {
+font-size: 2.7rem;
+}
+.text-background div {
+font-size: 2.1rem;
+}
+  }

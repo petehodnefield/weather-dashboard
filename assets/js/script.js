@@ -83,7 +83,7 @@ let displayWeatherFiveDays = function (fiveDayInfo) {
       .format("MMMM Do, YYYY");
     let eachDateContainer = document.createElement("div");
     eachDateContainer.textContent = eachDate;
-    eachDateContainer.classList.add("extra-padding");
+    eachDateContainer.classList.add("extra-padding", "date5");
 
     // daily icon
     let dailyIconCode = fiveDayInfo.daily[i].weather[0].icon;
@@ -111,6 +111,9 @@ let displayWeatherFiveDays = function (fiveDayInfo) {
     let dailyWeatherStatisticsContainerEl = document.createElement("div");
     dailyWeatherStatisticsContainerEl.classList.add("daily-container", "card");
 
+    let textBackground = document.createElement("div");
+    textBackground.classList.add("text-background");
+
     // add proper background to container
     if (dailyIconCode === "01d") {
       dailyWeatherStatisticsContainerEl.classList.add("sunny-weather");
@@ -118,13 +121,20 @@ let displayWeatherFiveDays = function (fiveDayInfo) {
       dailyWeatherStatisticsContainerEl.classList.add("thunderstorm-weather");
     } else if (dailyIconCode === "09d" || dailyIconCode === "10d") {
       dailyWeatherStatisticsContainerEl.classList.add("rain-weather");
+    } else if (dailyIconCode === "02d") {
+      dailyWeatherStatisticsContainerEl.classList.add("few-clouds-weather");
+    } else if (dailyIconCode === "03d" || dailyIconCode === "04d") {
+      dailyWeatherStatisticsContainerEl.classList.add(
+        "scattered-clouds-weather"
+      );
     }
-    dailyWeatherStatisticsContainerEl.appendChild(eachDateContainer);
-    dailyWeatherStatisticsContainerEl.appendChild(dailyTemp);
-    dailyWeatherStatisticsContainerEl.appendChild(dailyWindSpeed);
-    dailyWeatherStatisticsContainerEl.appendChild(dailyHumidity);
+    textBackground.appendChild(eachDateContainer);
+    textBackground.appendChild(dailyTemp);
+    textBackground.appendChild(dailyWindSpeed);
+    textBackground.appendChild(dailyHumidity);
 
-    dailyWeatherStatisticsContainerEl.appendChild(dailyWeatherIcon);
+    textBackground.appendChild(dailyWeatherIcon);
+    dailyWeatherStatisticsContainerEl.appendChild(textBackground);
     fiveDayWeatherInfoContainerEl.appendChild(
       dailyWeatherStatisticsContainerEl
     );
@@ -134,6 +144,7 @@ let displayWeatherFiveDays = function (fiveDayInfo) {
 let displayWeatherToday = function (weatherInfo) {
   // clear the container
   rightSideContainerEl.textContent = "";
+  rightSideContainerEl.removeAttribute("class");
 
   rightSideContainerEl.classList.add("day-container");
   // City Name
@@ -186,6 +197,19 @@ let displayWeatherToday = function (weatherInfo) {
   rightSideContainerEl.appendChild(weatherHumidityDisplay);
 
   rightSideContainerEl.appendChild(weatherIcon);
+
+  // add proper background to container
+  if (iconcode === "01d") {
+    rightSideContainerEl.classList.add("sunny-weather");
+  } else if (iconcode === "11d") {
+    rightSideContainerEl.classList.add("thunderstorm-weather");
+  } else if (iconcode === "09d" || iconcode === "10d") {
+    rightSideContainerEl.classList.add("rain-weather");
+  } else if (iconcode === "02d") {
+    rightSideContainerEl.classList.add("few-clouds-weather");
+  } else if (iconcode === "03d" || iconcode === "04d") {
+    rightSideContainerEl.classList.add("scattered-clouds-weather");
+  }
   // Get city's latitude and longitude
   let cityLatitude = weatherInfo.coord.lat;
   let cityLongitude = weatherInfo.coord.lon;
