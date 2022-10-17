@@ -230,8 +230,6 @@ let createButton = function (text) {
 
   // append to the container
   savedSearchesContainerEl.appendChild(savedUserInput);
-  // const paren = await localStorage.getItem("locations").split('"');
-  // console.log(paren);
 
   // save to local storage
   localStorage.setItem("locations", JSON.stringify(savedLocations));
@@ -263,8 +261,26 @@ let saveUserInput = async function (parameter) {
   }
 };
 
+const clearLocalStorage = function () {
+  localStorage.clear();
+  const buttons = document.querySelectorAll("button.city-btn");
+  buttons.forEach((button) => {
+    button.remove();
+  });
+  const clearBtn = document.querySelector(".clear-btn");
+  clearBtn.remove();
+  console.log(buttons);
+};
+
 let loadUserInput = function () {
   var searchedCities = JSON.parse(localStorage.getItem("locations") || "[]");
+  if (searchedCities.length > 0) {
+    let clearSearchesButton = document.createElement("button");
+    clearSearchesButton.classList.add("btn", "clear-btn");
+    clearSearchesButton.textContent = "Clear Searches";
+    savedSearchesContainerEl.appendChild(clearSearchesButton);
+    clearSearchesButton.addEventListener("click", clearLocalStorage);
+  }
   for (let j = 0; j < searchedCities.length; j++) {
     let createdPreviousCityButton = document.createElement("button");
     createdPreviousCityButton.textContent = searchedCities[j];

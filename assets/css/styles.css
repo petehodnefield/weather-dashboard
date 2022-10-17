@@ -64,7 +64,7 @@ h2 {
     font-size: 4rem;
 }
 .extra-padding {
-  padding-bottom: 2rem;
+  padding-bottom: 0.2rem;
 }
 
 span {
@@ -113,7 +113,6 @@ span {
     flex-direction: column;
     flex-wrap: nowrap;
     background: var(--3);
-    overflow: none;
     align-items: center;
     padding: 2rem 2rem;
     height: 500px;
@@ -126,6 +125,9 @@ span {
   text-shadow: 
   -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 
   -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
+}
+.inline-header {
+  font-size: 3.5rem;
 }
 /* Search area style */
 .search-container {
@@ -175,7 +177,6 @@ span {
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    height: 300px;
     font-size: 2rem;
     margin: .5rem;
     border: 2px solid var(--tan);
@@ -190,6 +191,7 @@ background: linear-gradient(180deg, hsla(248, 61%, 57%, 1) 0%, hsla(234, 88%, 68
 box-shadow: rgba(50, 50, 93, 0.9) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.9) 0px 18px 36px -18px inset;
 border-radius: 20px;
 padding: 1rem 2rem;
+text-align: center;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -227,7 +229,6 @@ height: 100%;
 }
 
 .btn {
-    background: var(--3);
     color: white;
     padding: .7rem 4rem;
     border: none;
@@ -238,9 +239,9 @@ height: 100%;
   cursor: pointer;
   opacity: .95;
 }
-
 .search-button {
   margin-bottom: .4rem;
+    background: var(--3);
 }
 .search-button:hover {
   
@@ -249,8 +250,13 @@ background: hsla(248, 61%, 57%, 1);
 background: linear-gradient(180deg, hsla(248, 61%, 57%, 1) 0%, hsla(234, 88%, 68%, 1) 100%);
   transition: .5s;
 }
+.clear-btn {
+  background: red;
+}
 .city-btn {
   margin: .3rem 0.2rem;
+  
+    background: var(--3);
 }
 
 /* /* Weather backgrounds { */
