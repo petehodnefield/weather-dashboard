@@ -148,8 +148,9 @@ span {
     border-radius: 10px;
 }
 .user-input:focus {
-  caret-color: var(--1);
-  border: 2px solid var(--3);
+  caret-color: black;
+  border: 6px solid var(--3);
+  border-radius: 20px;
   transition: .5s;
 }
 .city-search-form {
@@ -253,6 +254,10 @@ background: linear-gradient(180deg, hsla(248, 61%, 57%, 1) 0%, hsla(234, 88%, 68
 .clear-btn {
   background: red;
 }
+.bottom {
+  order: 3;
+  margin: 0.3rem 0.2rem;
+}
 .city-btn {
   margin: .3rem 0.2rem;
   
@@ -282,6 +287,14 @@ background-size: cover;
 .thunderstorm-weather {
   background: url(../images/lightning.jpg);
     background-size: cover;
+}
+.snow-weather {
+background: url(../images/snow.jpg);
+background-size: cover;
+}
+.mist-weather {
+background: url(../images/mist.jpg);
+background-size: cover;
 }
 
 @media screen and (min-width: 768px) {

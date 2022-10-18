@@ -21,6 +21,7 @@ let searchByCity = async function () {
 
   // run getFeaturedWeather with selectedCity
   getFeaturedWeatherToday(selectedCity);
+  userInputFieldEl.value = "";
 };
 
 // Fetch the Today's API data
@@ -127,6 +128,10 @@ let displayWeatherFiveDays = function (fiveDayInfo) {
       dailyWeatherStatisticsContainerEl.classList.add(
         "scattered-clouds-weather"
       );
+    } else if (dailyIconCode === "13d") {
+      dailyWeatherStatisticsContainerEl.classList.add("snow-weather");
+    } else if (dailyIconCode === "50d") {
+      dailyWeatherStatisticsContainerEl.classList.add("mist-weather");
     }
     textBackground.appendChild(eachDateContainer);
     textBackground.appendChild(dailyTemp);
@@ -207,8 +212,12 @@ let displayWeatherToday = function (weatherInfo) {
     rightSideContainerEl.classList.add("rain-weather");
   } else if (iconcode === "02d") {
     rightSideContainerEl.classList.add("few-clouds-weather");
-  } else if (iconcode === "03d" || iconcode === "04d") {
+  } else if (iconcode === "03d" || iconcode === "04d" || iconcode === "04n") {
     rightSideContainerEl.classList.add("scattered-clouds-weather");
+  } else if (iconcode === "13d") {
+    rightSideContainerEl.classList.add("snow-weather");
+  } else if (iconcode === "50d") {
+    rightSideContainerEl.classList.add("mist-weather");
   }
   // Get city's latitude and longitude
   let cityLatitude = weatherInfo.coord.lat;
@@ -226,8 +235,8 @@ let createButton = function (text) {
     "saved-results",
     "previous-search"
   );
-  savedUserInput.textContent = text;
 
+  savedUserInput.textContent = text;
   // append to the container
   savedSearchesContainerEl.appendChild(savedUserInput);
 
@@ -276,7 +285,7 @@ let loadUserInput = function () {
   var searchedCities = JSON.parse(localStorage.getItem("locations") || "[]");
   if (searchedCities.length > 0) {
     let clearSearchesButton = document.createElement("button");
-    clearSearchesButton.classList.add("btn", "clear-btn");
+    clearSearchesButton.classList.add("btn", "clear-btn", "bottom");
     clearSearchesButton.textContent = "Clear Searches";
     savedSearchesContainerEl.appendChild(clearSearchesButton);
     clearSearchesButton.addEventListener("click", clearLocalStorage);
