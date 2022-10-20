@@ -2,7 +2,7 @@
 
 ## Description
 
-- Weather Dashboard is a forecast app that allows the user to enter a city. Upon submission you are shown the current forecast, as well as the five-day forecast for that city.
+- Weather Dashboard is a forecast app that allows the user to enter a city. Upon submission you are shown the current forecast, as well as the five-day forecast for that city. Weather Dashboard also remembers previous searches.
 
 ## Installation
 
@@ -22,10 +22,6 @@
 - CSS
 - JavaScript
 - jQuery
-
-## How to Contribute
-
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./assets/license_contributing/code_of_conduct.md)
 
 ## Link to live deployment:
 
