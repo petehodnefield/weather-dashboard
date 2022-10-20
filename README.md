@@ -9,8 +9,8 @@
 - To install, clone the repository. Then, make an account for the OpenWeather API to make calls to that API.
 
 ## Usage
+![Screen Shot 2022-10-20 at 8 39 26 AM](https://user-images.githubusercontent.com/98546095/196964917-b8d30ed3-4040-4948-a53e-be07fad40155.png)
 
-- ADD WHEN FINISHED
 
 ## License
 
